@@ -4,6 +4,7 @@
 import os
 from pathlib import Path
 from bs4 import BeautifulSoup
+from os.path import exists
 
 options = input('''What do you want to get?
             1.Bookmarks
@@ -33,23 +34,25 @@ files = os.listdir(os.getcwd())
 
 #get bookmarks file
 for file in files:
-    if file == 'bookmarks.html':
+    if file.endswith('.html'):
         bookmarks_path = file
 
 for file in files:
-    if file == 'links.md':
+    if file.endswith('.md'):
         urls_file = file
 
-with open(bookmarks_path, 'r', encoding='utf-8') as bookmarks:
-    html_content = bookmarks.read()
+if exists('bookmarks.html'):
+    with open(bookmarks_path, 'r', encoding='utf-8') as bookmarks:
+        html_content = bookmarks.read()
 
 soup = BeautifulSoup(html_content, 'lxml')
 
 created_file = 'urls.md'
 save_path = os.path.join(os.getcwd(), created_file)
 
-with open(urls_file, 'r') as urls_file:
-  links = urls_file.read().splitlines()
+if exists('links.md'):
+    with open(urls_file, 'r') as urls_file:
+        links = urls_file.read().splitlines()
   
 with open(save_path, 'w') as create_urls_file:
 
