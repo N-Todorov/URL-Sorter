@@ -34,11 +34,11 @@ files = os.listdir(os.getcwd())
 
 #get bookmarks file
 for file in files:
-    if file.endswith('.html'):
+    if file == 'bookmarks.html':
         bookmarks_path = file
 
 for file in files:
-    if file.endswith('.md'):
+    if file == 'links.md':
         urls_file = file
 
 if exists('bookmarks.html'):
